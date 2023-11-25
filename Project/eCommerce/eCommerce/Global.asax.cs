@@ -12,6 +12,7 @@ namespace eCommerce
 {
     public class Global : HttpApplication
     {
+        public static string dbConnectionString = "Data Source=.;Initial Catalog=eCommerceDB;Integrated Security=True";
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
