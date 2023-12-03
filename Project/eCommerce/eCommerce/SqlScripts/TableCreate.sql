@@ -12,8 +12,12 @@ CREATE TABLE UserProfile (
     MobileNo VARCHAR(15),
     Email varchar(100),
     CurrentAddress VARCHAR(255),
-    DOB DATE
+    DOB DATE,
+    Passwords VARCHAR(50)
 )
+
+ALTER TABLE UserProfile
+ADD UNIQUE (UserName)
 
 CREATE TABLE ProductListing (
     ProductID INT PRIMARY KEY IDENTITY(1001, 1) NOT NULL,

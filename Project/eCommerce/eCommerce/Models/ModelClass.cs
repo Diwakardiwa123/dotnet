@@ -22,6 +22,7 @@ namespace eCommerce
         public string Email { get; set; }
         public string CurrentAddress { get; set; }
         public DateTime DOB { get; set; }
+        public string Password { get; set; }
     }
 
     public class ProductListModel
