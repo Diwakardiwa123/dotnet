@@ -3,14 +3,17 @@ import { Component } from '@angular/core';
 let HomeComponent = class HomeComponent {
     constructor(server) {
         this.server = server;
+        this.isLoading = true;
     }
     ngOnInit() {
+        setTimeout(() => {
+            this.server.getproducts()
+                .subscribe(product => (this.products = product), error => alert(error), () => console.warn(this.products));
+            this.isLoading = false;
+        }, 2000);
     }
     onclick() {
-        this.server.getproducts().subscribe(product => {
-            console.warn(product);
-        });
-        //this.newProducts = this.products.filter(x => x.IsNewCollection = 'true');
+        console.warn("clicked");
     }
 };
 HomeComponent = __decorate([

@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="src\app\shimmer\shimmer.component.css" />
+    <Content Include="src\app\shimmer\shimmer.component.html" />
     <Content Include="src\assets\Images\banner_01.jpg" />
     <Content Include="src\assets\Images\banner_02.jpg" />
     <Content Include="src\assets\Images\casual_01.jpg" />
@@ -225,6 +227,8 @@
     <TypeScriptCompile Include="src\app\payment\payment.component.ts" />
     <TypeScriptCompile Include="src\app\product\product.component.spec.ts" />
     <TypeScriptCompile Include="src\app\product\product.component.ts" />
+    <TypeScriptCompile Include="src\app\shimmer\shimmer.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\shimmer\shimmer.component.ts" />
     <TypeScriptCompile Include="src\app\shop\shop.component.spec.ts" />
     <TypeScriptCompile Include="src\app\shop\shop.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />

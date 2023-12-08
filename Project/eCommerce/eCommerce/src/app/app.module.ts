@@ -13,6 +13,7 @@ import { CartComponent } from './cart/cart.component';
 import { PaymentComponent } from './payment/payment.component';
 
 import  HelperService  from '../shared/helper.service';
+import { ShimmerComponent } from './shimmer/shimmer.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import  HelperService  from '../shared/helper.service';
         ShopComponent,
         ProductComponent,
         CartComponent,
-        PaymentComponent
+        PaymentComponent,
+        ShimmerComponent
     ],
     imports: [
         BrowserModule,
