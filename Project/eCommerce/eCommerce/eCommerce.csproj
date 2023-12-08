@@ -131,18 +131,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Resources\Images\casual_01.jpg" />
-    <Content Include="Resources\Images\running_01.jpg" />
-    <Content Include="Resources\Images\running_02.jpg" />
-    <Content Include="Resources\Images\running_03.jpg" />
-    <Content Include="Resources\Images\running_04.jpg" />
-    <Content Include="Resources\Images\sneaker_01.jpg" />
-    <Content Include="Resources\Images\sneaker_02.jpg" />
-    <Content Include="Resources\Images\sneaker_03.jpg" />
-    <Content Include="Resources\Images\sneaker_04.jpg" />
-    <Content Include="Resources\Images\sport_01.jpg" />
-    <Content Include="Resources\Images\sport_02.jpg" />
-    <Content Include="Resources\Images\sport_03.jpg" />
+    <Content Include="src\assets\Images\banner_01.jpg" />
+    <Content Include="src\assets\Images\banner_02.jpg" />
+    <Content Include="src\assets\Images\casual_01.jpg" />
+    <Content Include="src\assets\Images\running_01.jpg" />
+    <Content Include="src\assets\Images\running_02.jpg" />
+    <Content Include="src\assets\Images\running_03.jpg" />
+    <Content Include="src\assets\Images\running_04.jpg" />
+    <Content Include="src\assets\Images\sneaker_01.jpg" />
+    <Content Include="src\assets\Images\sneaker_02.jpg" />
+    <Content Include="src\assets\Images\sneaker_03.jpg" />
+    <Content Include="src\assets\Images\sneaker_04.jpg" />
+    <Content Include="src\assets\Images\sport_01.jpg" />
+    <Content Include="src\assets\Images\sport_02.jpg" />
+    <Content Include="src\assets\Images\sport_03.jpg" />
     <Content Include="Scripts\Lib\3rdpartylicenses.txt" />
     <Content Include="Scripts\Lib\favicon.ico" />
     <Content Include="Scripts\Lib\index.html" />
@@ -193,6 +195,8 @@
     <Content Include="src\assets\.gitkeep" />
     <Content Include="tsconfig.app.json" />
     <Content Include="tsconfig.json" />
+    <Content Include="src\assets\fonts\Overthink\Overthink.otf" />
+    <Content Include="src\assets\fonts\Overthink\Overthink.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -225,6 +229,7 @@
     <TypeScriptCompile Include="src\app\shop\shop.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\shared\helper.service.ts" />
+    <TypeScriptCompile Include="src\shared\ProductModel.ts" />
     <TypeScriptCompile Include="src\shared\UserModel.ts" />
   </ItemGroup>
   <PropertyGroup>

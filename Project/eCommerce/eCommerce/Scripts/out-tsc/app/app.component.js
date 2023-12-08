@@ -18,9 +18,9 @@ let AppComponent = class AppComponent {
         newProfile.CurrentAddress = "456 Side St, Town";
         newProfile.DOB = new Date("1995-05-05");
         newProfile.Password = "newpassword789";
-        this.server.post(newProfile);
-        this.server.OnPostUser().subscribe(users => (this.users = users));
-        console.warn(this.users);
+        //this.server.post(newProfile);     
+        //this.server.OnPostUser().subscribe(users => (this.users = users));
+        //console.warn(this.users);
     }
 };
 AppComponent = __decorate([

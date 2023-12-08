@@ -6,6 +6,7 @@ let HelperService = class HelperService {
         this.http = http;
         this.homeController = 'https://localhost:44364/api/UserProfile/GetUsers';
         this.apiController = 'https://localhost:44364/api/UserProfile/UserPost';
+        this.productapi = 'https://localhost:44364/api/Products/GetProduct';
         this.httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -17,6 +18,9 @@ let HelperService = class HelperService {
     }
     post(user) {
         this.http.post(this.apiController, user, this.httpOptions).subscribe();
+    }
+    getproducts() {
+        return this.http.get(this.productapi, this.httpOptions);
     }
 };
 HelperService = __decorate([

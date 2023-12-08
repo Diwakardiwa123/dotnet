@@ -35,6 +35,7 @@ namespace eCommerce
         public string Category { get; set; }
         public string Manufacturer { get; set; }
         public string ImageURL { get; set; }
+        public bool IsNewCollection { get; set; }
     }
 
     public class WishlistModel

@@ -67,6 +67,7 @@ namespace eCommerce
                     model.Category = dataReader["Category"].ToString();
                     model.Manufacturer = dataReader["Manufacturer"].ToString();
                     model.ImageURL = dataReader["ImageURL"].ToString();
+                    model.IsNewCollection = Boolean.Parse(dataReader["IsNewCollection"].ToString());
 
                     if (productId != null && model.ProductID == productId)
                     {

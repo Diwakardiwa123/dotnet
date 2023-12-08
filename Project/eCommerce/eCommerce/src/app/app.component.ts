@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import HelperService from '../shared/helper.service';
-import  UserModel  from '../shared/UserModel'
+import ProductModel from '../shared/ProductModel';
+import UserModel from '../shared/UserModel';
 
 
 @Component({
@@ -33,9 +34,9 @@ export class AppComponent {
         newProfile.DOB = new Date("1995-05-05");
         newProfile.Password = "newpassword789";
 
-        this.server.post(newProfile);     
+        //this.server.post(newProfile);     
 
-        this.server.OnPostUser().subscribe(users => (this.users = users));
-        console.warn(this.users);
+        //this.server.OnPostUser().subscribe(users => (this.users = users));
+        //console.warn(this.users);
     }
 }
