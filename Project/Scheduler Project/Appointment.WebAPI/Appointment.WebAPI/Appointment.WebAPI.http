@@ -1,0 +1,6 @@
+@Appointment.WebAPI_HostAddress = http://localhost:5000
+
+GET {{Appointment.WebAPI_HostAddress}}/User/
+Accept: application/json
+
+###

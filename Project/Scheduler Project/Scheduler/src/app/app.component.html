@@ -1,0 +1,76 @@
+<html>
+
+<body style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+  <header>
+    <nav style="height: 60px; padding: 0;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="margin-left: 20px;">
+          <p>SCHEDULER</p>
+        </div>
+        <div style=" margin-right: 10px; background-color: transparent; width: 160px;" *ngIf="!isLoggedIn">
+          <button mat-button (click)="onloginclicked()" class="authButtons"
+            style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Login</button>
+          <button mat-button (click)="onSignupClicked()" class="auth-Buttons"
+            style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Sign up</button>
+        </div>
+        <div style=" margin-right: 10px; background-color: transparent; width: 160px;" *ngIf="isLoggedIn">
+          <button mat-button (click)="onAddClicked()" class="authButtons"
+            style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Add</button>
+          <button mat-button (click)="onSignOutClicked()" class="auth-Buttons"
+            style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Sign out</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section>
+    <div
+      style="background-color: #d6d6d6; height:100%; display: flex; align-items: center; justify-content: space-around;">
+      <div style="background-color: white; margin: 20px; border-radius: 10px; height: 95%; width: 95%;">
+        <div style="height: 60px; display: flex; align-items: center;">
+          <button  class="orderButton"
+            style="background-color: rgb(242, 242, 242); border: 0px; border-radius: 20px; height: 40px; width: 100px; margin-left: 10px; margin-right: 10px;">Upcoming</button>
+          <button class="orderButton"
+            style="background-color: rgb(242, 242, 242); border: 0px; margin-left: 10px; margin-right: 10px; border-radius: 20px; height: 40px; width: 80px;">All</button>
+          <button class="orderButton"
+            style="background-color: rgb(242, 242, 242); border: 0px; margin-left: 10px; margin-right: 10px; border-radius: 20px; height: 40px; width: 90px;">Past</button>
+        </div>
+        <div style="background-color: rgba(237, 237, 237, 0.775);">
+          <div
+            style=" height: 40px; display: flex; align-items: center; justify-content: space-between; margin-right: 20px; margin-left: 30px;">
+            <div style="width: 15%;">
+              ID
+            </div>
+            <div style="width: 50%;">
+              Appointments!!
+            </div>
+            <div style="width: 20%;">
+              Date
+            </div>
+            <div style="width: 15%;">
+
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; overflow-y: scroll; margin-left: 20px;">
+          <div *ngFor="let appointment of appointments"
+            style=" height: 50px; display: flex; align-items: center; justify-content: space-between; margin-top: 10px; margin-bottom: 10px;">
+            <div style="width: 15%;">
+              {{appointment.appointmentNumber}}
+            </div>
+            <div style="width: 50%;">
+              {{appointment.descriptions}}
+            </div>
+            <div style="width: 20%;">
+              {{appointment.appointmentDate}}
+            </div>
+            <div style="width: 15%;">
+              <button mat-stroked-button>Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

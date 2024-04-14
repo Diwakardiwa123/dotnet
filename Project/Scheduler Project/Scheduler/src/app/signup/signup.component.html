@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="login-form">
+        <h1>Sign up</h1>
+        <p class="user-name">
+            <mat-form-field appearance="outline">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="User name" [(ngModel)]="userName" required>
+            </mat-form-field>
+        </p>
+        <p class="password">
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="'password'" [(ngModel)]="userPassword" required>
+            </mat-form-field>
+        </p>
+        <p class="user-address">
+            <mat-form-field appearance="outline">
+                <mat-label>User Address</mat-label>
+                <input matInput [type]="'Adderss'" [(ngModel)]="address" placeholder="Adderss" >
+            </mat-form-field>
+        </p>
+        <p class="user-mobile">
+            <mat-form-field appearance="outline">
+                <mat-label>Mobile</mat-label>
+                <input matInput placeholder="Mobile number" [(ngModel)]="mobile" required>
+            </mat-form-field>
+        </p>
+        <p class="user-email">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" [(ngModel)]="email" required>
+            </mat-form-field>
+        </p>
+        <button class="sign-button" mat-flat-button color="primary" (click)="onSignupClicked()">Sign up</button>
+    </div>
+</div>
