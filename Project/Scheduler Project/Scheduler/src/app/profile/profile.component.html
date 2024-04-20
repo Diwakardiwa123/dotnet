@@ -1,0 +1,42 @@
+<body>
+    <div class="profile-container" *ngIf="!isEditing">
+        <h1>User Profile</h1>
+        <div class="profile-details">
+            <img id="image" [src]="userIcon"/>
+            <div class="detail">
+                <h1 id="username">{{currentUser.userName}}</h1>
+            </div>
+            <div class="detail">
+                <p id="address">{{currentUser.userAddress}}</p>
+            </div>
+            <div class="contact">
+                <p id="mobile">{{currentUser.mobileNumber}}</p>
+                <p id="email">{{currentUser.email}}</p>
+            </div>
+            <div class="edit">
+                <input id="editbtn" type="submit" (click)="onEditClicked()" value="Edit">
+                <input id="deletebtn" type="submit" (click)="onDeleteClicked()" value="Delete Account">
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container" *ngIf="isEditing">
+        <h1>User Profile</h1>
+        <div class="profile-details">
+            <img id="image" [src]="userIcon" />
+            <div class="detail">
+                <input type="text" id="username" [(ngModel)]="currentUser.userName">
+            </div>
+            <div class="detail">
+                <input type="text" id="address" [(ngModel)]="currentUser.userAddress">
+            </div>
+            <div class="contact">
+                <input type="text" id="mobile" [(ngModel)]="currentUser.mobileNumber">
+                <input type="text" id="email" [(ngModel)]="currentUser.email">
+            </div>
+            <div class="edit">
+                <input id="editbtn" type="submit" (click)="onConfirmClicked()" value="Confirm">
+            </div>
+        </div>
+    </div>
+</body>

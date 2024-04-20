@@ -9,9 +9,9 @@ public partial class Appointment
 
     public int AppointmentNumber { get; set; }
 
-    public DateOnly? AppointmentDate { get; set; }
+    public DateTime? AppointmentDate { get; set; }
 
-    public TimeOnly? AppointmentTime { get; set; }
+    public DateTime? AppointmentTime { get; set; }
 
     public string? AppointmentName { get; set; }
 

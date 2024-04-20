@@ -1,4 +1,5 @@
 ﻿using Appointment.WebAPI.Model;
+using Appointment.WebAPI.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,19 +7,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Appointment.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private AppointmentDbContext _dbContext;
+        private IUserService _service;
 
-        public UserController(AppointmentDbContext dBContext)
+        public UserController(AppointmentDbContext dBContext, IUserService service)
         {
             _dbContext = dBContext;
+            _service = service;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetLoginStatus")]
+        public bool GetLoginStatus()
+        {
+            return this.HttpContext.User.Identity is not null && this.HttpContext.User.Identity.IsAuthenticated;
         }
 
         [HttpGet]
@@ -31,19 +44,20 @@ namespace Appointment.WebAPI.Controllers
                 return Unauthorized();
             }
 
-            //var userID = GetUserIDFromJWT();
-            //var user = _dbContext.UserTables.Where(x => x.UserId == userID).FirstOrDefault();
-            //if (user is null) return NotFound("Requested data is not available");
-
-            var identity = this.HttpContext.User.Identity as ClaimsIdentity;
-            if (identity == null) return BadRequest();
-
-            var userID = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var user = _dbContext.UserTables.Where(x => x.UserId.ToString() == userID).FirstOrDefault();
-            return Ok(user);
+            var userID = _service.GetUserID();
+            if (!userID.IsNullOrEmpty())
+            {
+                var user = _dbContext.UserTables.Where(x => x.UserId.ToString() == userID).FirstOrDefault();
+                return Ok(user);
+            }
+            else
+            {
+                return BadRequest("User is not found");
+            }
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("PostUser")]
         public async Task<IActionResult> PostUserAsync([FromBody] UserTable user)
         {
@@ -51,7 +65,8 @@ namespace Appointment.WebAPI.Controllers
 
             try
             {
-                var lastUserID = _dbContext.UserTables.Last().UserId;
+                var lastUserID = _dbContext.UserTables.OrderBy(x => x.UserId).Last().UserId;
+                user.UserPassword = UserService.HashPassword(user.UserPassword);
                 user.UserId = lastUserID + 1;
 
                 _dbContext.UserTables.Add(user);
@@ -65,12 +80,15 @@ namespace Appointment.WebAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("Remove/{id:int}")]
-        public async Task<IActionResult> RemoveUserAsync(int id)
+        [Route("Remove")]
+        public async Task<IActionResult> RemoveUserAsync()
         {
+            var userID = _service.GetUserID();
+            if (userID.IsNullOrEmpty()) return NotFound("User not found");
+
             try
             {
-                var currentUser = _dbContext.UserTables.Where(x => x.UserId == id).FirstOrDefault();
+                var currentUser = _dbContext.UserTables.Where(x => x.UserId.ToString() == userID).FirstOrDefault();
                 if (currentUser is null) return NotFound("User is not found for the mentioned id");
 
                 _dbContext.UserTables.Remove(currentUser);
@@ -107,16 +125,5 @@ namespace Appointment.WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        //private int GetUserIDFromJWT()
-        //{
-        //    var jwtToken = this.Request.Headers["Authorization"].ToString().Split(" ")[1];
-        //    var payloadStr = jwtToken.ToString().Split(".")[1];
-
-        //    var jsonString = Base64UrlEncoder.Decode(payloadStr);
-        //    var id = JsonConvert.DeserializeObject<UserDetail>(jsonString)!.NameID;
-
-        //    return int.Parse(id);
-        //}
     }
 }

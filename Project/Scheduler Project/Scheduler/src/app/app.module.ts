@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddComponent } from './add/add.component';
 import { DetailComponent } from './detail/detail.component';
 import { SignupComponent } from './signup/signup.component';
+import { AppointmentLandingComponent } from './appointment-landing/appointment-landing.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { SignupComponent } from './signup/signup.component';
     LoginComponent,
     AddComponent,
     DetailComponent,
-    SignupComponent
+    SignupComponent,
+    AppointmentLandingComponent,
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

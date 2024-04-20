@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ApiService } from '../api.service';
-import { DataService } from '../data.service';
+import { ApiService } from 'src/appservices/api.service';
+import { DataService } from 'src/appservices/data.service';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -20,8 +20,7 @@ export class LoginComponent {
   constructor(private service: ApiService, private dialogRef: MatDialogRef<LoginComponent>, private data: DataService){}
 
   onLoginClick() {
-    console.log(this.userName + this.password);
-
+    
     const userLogin = {
       'userName' : this.userName,
       'password' : this.password
@@ -30,9 +29,9 @@ export class LoginComponent {
     this.service.postLogin(userLogin).subscribe((res: any) => {
       if(res != null){
         localStorage["token"] = res +'';
-        console.log(localStorage["token"]);
         this.data.setLogginStatus(true);
         this.dialogRef.close();
+        location.reload();
       }
     })
   }

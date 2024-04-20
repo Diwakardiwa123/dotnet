@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Security.Claims;
 using AppointmentModel = Appointment.WebAPI.Model.Appointment;
 
@@ -33,17 +34,22 @@ namespace Appointment.WebAPI.Controllers
 
         [HttpPost]
         [Route("PostAppointment")]
-        public async Task<IActionResult> PostAppointmentAsync([FromBody] AppointmentModel appointment)
+        public async Task<IActionResult> PostAppointmentAsync([FromBody] object obj)
         {
-            if (appointment is null) return NotFound("Requested body is null");
+            if (obj is null) return NotFound("Requested body is null");
 
             UserTable user = this.GetCurrentUser();
-            if (user is null || user.UserId != appointment.UserId) return BadRequest();
+            if (user is null) return BadRequest();
+
+            var appointment = JsonConvert.DeserializeObject<AppointmentModel>(obj.ToString());
+            if (appointment is null) return BadRequest();
 
             try
             {
-                var lastAppointmentID = _dbContext.Appointments.Last().AppointmentNumber;
+                var lastAppointmentID = _dbContext.Appointments.OrderBy(x => x.AppointmentNumber).Last().AppointmentNumber;
                 appointment.AppointmentNumber = lastAppointmentID + 1;
+                appointment.UserId = user.UserId;
+                appointment.AppointmentTime = appointment.AppointmentDate!.Value.Date + appointment.AppointmentTime!.Value.TimeOfDay;
 
                 _dbContext.Appointments.Add(appointment);
                 var result = await _dbContext.SaveChangesAsync();
@@ -56,7 +62,7 @@ namespace Appointment.WebAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("Remove/")]
+        [Route("Remove")]
         public async Task<IActionResult> RemoveAppointmentAsync([FromBody] AppointmentModel appointment)
         {
             if (appointment is null) return NotFound("Requested body is null");

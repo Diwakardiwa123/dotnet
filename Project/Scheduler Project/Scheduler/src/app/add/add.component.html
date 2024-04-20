@@ -1,1 +1,26 @@
-<p>add works!</p>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <h2>Appointment Form</h2>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="appointmentDate">Date:</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" [(ngModel)]="appointmentDate">
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Time:</label>
+                    <input type="time" id="appointmentTime" name="appointmentTime" [(ngModel)]="appointmentTime">
+                </div>
+                <div class="form-group">
+                    <label for="appointmentName">Name:</label>
+                    <input type="text" id="appointmentName" name="appointmentName" [(ngModel)]="appointmentName">
+                </div>
+                <div class="form-group">
+                    <label for="descriptions">Description:</label>
+                    <textarea id="descriptions" name="descriptions" [(ngModel)]="descriptions"></textarea>
+                </div>
+                <button type="submit" (click)="onSubmitClicked()">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>

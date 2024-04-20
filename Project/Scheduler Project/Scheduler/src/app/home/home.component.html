@@ -1,0 +1,43 @@
+<body style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <header>
+        <nav style="height: 60px; padding: 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="margin-left: 20px;">
+                    <p>SCHEDULER</p>
+                </div>
+                <div style=" margin-right: 10px; background-color: transparent; width: 160px;" *ngIf="!isLoggedIn">
+                    <button mat-button (click)="onloginclicked()" class="authButtons"
+                        style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Login</button>
+                    <button mat-button (click)="onSignupClicked()" class="auth-Buttons"
+                        style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Sign
+                        up</button>
+                </div>
+                <div style=" margin-right: 10px; background-color: transparent; width: 160px;" *ngIf="isLoggedIn">
+                    <button mat-button (click)="onAddClicked()" class="authButtons"
+                        style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Add</button>
+                    <button mat-button (click)="onSignOutClicked()" class="auth-Buttons"
+                        style="background-color: transparent; border: 0px; width: 75px; height: 60px; padding: 0;">Sign
+                        out</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section style="height: 95%;">
+        <div
+            style="background-color: #d6d6d6; height:100%; display: flex; align-items: center; justify-content: space-around;">
+            <div *ngIf="isLoggedIn"
+                style=" height: auto; display: flex; align-items:start; margin: -200px 0px 0px 0px; width: 15%;">
+                <div>
+                    <ul style="list-style-type: none; width: 100%;">
+                        <li><a href="#" [routerLink]="['profile']">Profile</a></li>
+                        <li><a href="#" [routerLink]="['appointment']">Appointments</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background-color: white; margin: 20px; border-radius: 10px; height: 95%; width: 95%;">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </section>
+</body>

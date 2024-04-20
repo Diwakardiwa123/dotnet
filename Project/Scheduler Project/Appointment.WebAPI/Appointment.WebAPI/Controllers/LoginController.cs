@@ -1,4 +1,5 @@
 ﻿using Appointment.WebAPI.Model;
+using Appointment.WebAPI.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +30,9 @@ namespace Appointment.WebAPI.Controllers
         {
             if (!this.ModelState.IsValid || user is null) return BadRequest("Please enter proper Username and password");
 
+            var hashedPass = UserService.HashPassword(user.Password);
             // we authorize the user and send the user to GetToken to generate token with userid as a payload.
-            var requiredUser = _dbContext.UserTables.Where(x => x.UserName == user.UserName && x.UserPassword == user.Password).FirstOrDefault();
+            var requiredUser = _dbContext.UserTables.Where(x => x.UserName == user.UserName && x.UserPassword == hashedPass).FirstOrDefault();
             if (requiredUser == null) return BadRequest("Please enter correct Username and password");
 
             var token = this.GetToken(requiredUser);
@@ -49,7 +51,7 @@ namespace Appointment.WebAPI.Controllers
                     new Claim(ClaimTypes.Name, requiredUser.UserName),
                     new Claim(ClaimTypes.NameIdentifier, requiredUser.UserId.ToString()),
                 }),
-                Expires = DateTime.Now.AddMinutes(15),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 
