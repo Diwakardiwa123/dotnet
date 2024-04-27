@@ -20,10 +20,10 @@ export class HomeComponent {
   public isLoggedIn = this.data.getLogginStatus();
 
   ngOnInit(){
-    console.log(this.isLoggedIn);
     this.service.getLoginStatus().subscribe((res: any)=>{
-          this.isLoggedIn = res;
-          if(this.isLoggedIn) this.router.navigateByUrl("/home/appointment");
+      this.isLoggedIn = res;
+      if(this.isLoggedIn) this.router.navigateByUrl("/home/appointment");
+      console.log(this.isLoggedIn);
         }); 
   }
 

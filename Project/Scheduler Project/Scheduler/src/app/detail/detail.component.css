@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.data-container{
+    margin: 80px 50px 50px 150px;
+    height: auto;
+}
+
+#content{
+    background-color: rgb(247, 247, 247);
+    height: 100%;
+}
+
+#details-content{
+    margin: 50px 250px 50px 150px;
+    height: 100%;
+}
+
+.date-time{
+    display: flex;
+    justify-content: space-between;
+}
+
+#name{
+    font-size: 35px;
+    font-weight: bold;
+    line-height: normal;
+}
+
+#description{
+    border-radius: 15px;
+    height: auto;
+    font-size: 16px;
+}
+
+#description-title{
+    font-size: 18px;
+    font-weight:500;
+}

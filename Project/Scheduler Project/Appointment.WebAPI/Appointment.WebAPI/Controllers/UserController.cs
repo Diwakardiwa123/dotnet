@@ -1,6 +1,7 @@
 ﻿using Appointment.WebAPI.Model;
 using Appointment.WebAPI.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.Text;
 namespace Appointment.WebAPI.Controllers
 {
     [Authorize]
+    [EnableCors]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase

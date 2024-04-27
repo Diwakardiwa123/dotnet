@@ -1,17 +1,20 @@
 ﻿using Appointment.WebAPI.Model;
 using Appointment.WebAPI.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.IO;
+using Files = System.IO.File;
 
 namespace Appointment.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
         private AppointmentDbContext _dbContext;
@@ -28,15 +31,50 @@ namespace Appointment.WebAPI.Controllers
         [AllowAnonymous]
         public IActionResult LoginAsync([FromBody] UserLogin user)
         {
-            if (!this.ModelState.IsValid || user is null) return BadRequest("Please enter proper Username and password");
+            try
+            {
+                if (!this.ModelState.IsValid || user is null) return BadRequest("Please enter proper Username and password");
 
-            var hashedPass = UserService.HashPassword(user.Password);
-            // we authorize the user and send the user to GetToken to generate token with userid as a payload.
-            var requiredUser = _dbContext.UserTables.Where(x => x.UserName == user.UserName && x.UserPassword == hashedPass).FirstOrDefault();
-            if (requiredUser == null) return BadRequest("Please enter correct Username and password");
+                var hashedPass = UserService.HashPassword(user.Password);
+                // we authorize the user and send the user to GetToken to generate token with userid as a payload.
+                var requiredUser = _dbContext.UserTables.Where(x => x.UserName == user.UserName && x.UserPassword == hashedPass).FirstOrDefault();
+                if (requiredUser == null) return BadRequest("Please enter correct Username and password");
 
-            var token = this.GetToken(requiredUser);
-            return Ok(token);
+                var token = this.GetToken(requiredUser);
+                return Ok(token);
+            }
+            catch (Exception ex)
+            {
+
+                string fileName = @"C:\Diwakar\git\Project\Scheduler Project\ErrorLog.txt";
+                try
+                {
+                    // Check if file already exists. If yes, delete it.
+                    if (Files.Exists(fileName))
+                    {
+                        Files.Delete(fileName);
+                    }
+
+                    // Create a new file
+                    using (FileStream fs = Files.Create(fileName))
+                    {
+                        // Add some text to file
+                        Byte[] title = new UTF8Encoding(true).GetBytes("New Text File");
+                        fs.Write(title, 0, title.Length);
+                    }
+
+                    // Open the stream and read it back.
+                    using (StreamWriter sw = Files.CreateText(fileName))
+                    {
+                        sw.WriteLine(ex.InnerException);
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Console.WriteLine(Ex.ToString());
+                }
+                return BadRequest(ex.Message);
+            }
         }
 
         public string GetToken(UserTable requiredUser)

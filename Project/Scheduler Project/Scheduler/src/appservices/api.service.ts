@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http : HttpClient) { }
 
-  apiUrl = "https://localhost:44352/api";
+  apiUrl = "http://192.168.29.214/api";
 
   getLoginStatus(): any{
     var url = this.apiUrl + "/User/GetLoginStatus"
@@ -23,7 +23,10 @@ export class ApiService {
     var loginUrl = this.apiUrl+ "/Login";
     localStorage["token"] = "";
     var header = this.getHeaders();    
-    return this.http.post<any>(loginUrl, userLogin, {headers: header})
+    const httpOptions = {
+      headers : header
+    }
+    return this.http.post<any>(loginUrl, userLogin, httpOptions)
   }
 
   getUser(): Observable<any>{

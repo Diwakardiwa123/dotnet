@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserTable } from 'src/UserModel';
 import { ApiService } from 'src/appservices/api.service';
 
@@ -9,7 +10,7 @@ import { ApiService } from 'src/appservices/api.service';
 })
 export class AddComponent {
 
-  constructor(private service: ApiService){ }
+  constructor(private service: ApiService, private route: Router){ }
 
   appointmentDate: Date = new Date();
   appointmentTime = "";
@@ -23,11 +24,9 @@ export class AddComponent {
       'appointmentName' : this.appointmentName,
       'descriptions' : this.descriptions,
     }
-
-    console.log(appointment);
-    
-
     this.service.postAppointment(appointment).subscribe();
+
+    this.route.navigateByUrl("/home/appointment", { onSameUrlNavigation: 'reload'});
   }
 
 }

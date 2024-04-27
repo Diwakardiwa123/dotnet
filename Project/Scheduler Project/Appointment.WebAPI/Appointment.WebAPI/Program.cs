@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Appointment.WebAPI.Middleware;
 using Appointment.WebAPI.Service;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -14,6 +16,16 @@ var config = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(x =>
    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().WithMethods(["GET", "POST", "DELETE", "OPTION", "PUT", "PATCH"]).AllowAnyHeader();
+    });
+});
+builder.Services.AddAuthorization();
+builder.Services.AddAuthorizationBuilder();
 
 builder.Services.AddAuthentication(auth =>
 {
@@ -33,19 +45,25 @@ builder.Services.AddAuthentication(auth =>
         ClockSkew = TimeSpan.Zero
     };
 });
-builder.Services.AddCors();
-builder.Services.AddAuthorizationBuilder();
-builder.Services.AddDbContext<AppointmentDbContext>(option => option.UseSqlServer("Data Source=.;Initial Catalog=AppointmentDB;Integrated Security=True;Trust Server Certificate=True"));
+
+builder.Services.AddDbContext<AppointmentDbContext>(option =>
+{
+    option.UseSqlServer("Data Source=.;Initial Catalog=AppointmentDB;Integrated Security=True;Trust Server Certificate=True", 
+        sqlServerOptionsAction: sqlOption =>
+        {
+            sqlOption.EnableRetryOnFailure(6, TimeSpan.FromSeconds(5), null);            
+        });
+});
 builder.Services.AddSingleton<IUserService, UserService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
-app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
-app.UseMiddleware<ValidateMiddleware>();
 app.UseAuthentication();
 app.UseRouting();
+app.UseCors();
+app.UseMiddleware<ValidateMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 

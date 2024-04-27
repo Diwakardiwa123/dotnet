@@ -1,1 +1,16 @@
-<p>detail works!</p>
+<div class="container">
+    <div class="data-container">
+        <p id="name">{{value.appointmentName}}</p>
+    </div>
+
+    <div id="content">
+        <div id="details-content">
+            <div class="date-time">
+                <P id="date">{{value.appointmentDate | date: 'MMM dd, yyyy'}}</P>
+                <P id="time">{{value.appointmentTime | date: 'hh:mm'}}</P>
+            </div>
+            <p id="description-title">Details</p>
+            <p id="description">{{value.descriptions}}</p>
+        </div>
+    </div>
+</div>

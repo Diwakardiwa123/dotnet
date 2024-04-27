@@ -1,7 +1,9 @@
 ﻿using Appointment.WebAPI.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using AppointmentModel = Appointment.WebAPI.Model.Appointment;
@@ -26,7 +28,7 @@ namespace Appointment.WebAPI.Controllers
             UserTable user = this.GetCurrentUser();
             if (user is null) return BadRequest();
 
-            var appointmentList = _dbContext.Appointments.Where(x => x.UserId == user.UserId).ToList();
+            var appointmentList = _dbContext.Appointments.Where(x => x.UserId == user.UserId).AsNoTracking().ToList(); // AsNoTracking increase performance
             if (appointmentList is null) return NotFound("Requested data is not available");
 
             return Ok(appointmentList);
