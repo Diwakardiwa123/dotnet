@@ -1,0 +1,48 @@
+<div style="background-color: white; margin: 20px; border-radius: 10px; height: 95%; width: 95%;">
+    <div style="height: 60px; display: flex; align-items: center;">
+        <button class="orderButton" (click)="onUpcomingClicked()"
+            style="background-color: rgb(242, 242, 242); border: 0px; border-radius: 20px; height: 40px; width: 100px; margin-left: 10px; margin-right: 10px;">Upcoming</button>
+        <button class="orderButton" (click)="onAllClicked()"
+            style="background-color: rgb(242, 242, 242); border: 0px; margin-left: 10px; margin-right: 10px; border-radius: 20px; height: 40px; width: 80px;">All</button>
+        <button class="orderButton" (click)="onPastClicked()"
+            style="background-color: rgb(242, 242, 242); border: 0px; margin-left: 10px; margin-right: 10px; border-radius: 20px; height: 40px; width: 90px;">Past</button>
+    </div>
+    <div style="background-color: rgba(237, 237, 237, 0.775);">
+        <div
+            style=" height: 40px; display: flex; align-items: center; justify-content: space-between; margin-right: 20px; margin-left: 30px;">
+            <div style="width: 15%;">
+                ID
+            </div>
+            <div style="width: 50%;">
+                Appointments!!
+            </div>
+            <div style="width: 20%;">
+                Date
+            </div>
+            <div style="width: 15%;">
+
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: column; overflow-y: scroll; margin-left: 0px;">
+        <div *ngFor="let appointment of appointments">
+            <div
+                style=" height: 50px; display: flex; align-items: center; justify-content: space-between; margin-top: 10px; margin-bottom: 10px; background-color: transparent;">
+                <div style="width: 15%; margin-left: 20px;">
+                    {{appointment.appointmentNumber}}
+                </div>
+                <div style="width: 50%;">
+                    {{appointment.appointmentName}}
+                </div>
+                <div style="width: 20%;">
+                    {{appointment.appointmentDate | date: 'MMM d, y'}}
+                </div>
+                <div style="width: 15%;">
+                    <!-- <button mat-stroked-button (click)="onDetailClicked(appointment)">Details</button> -->
+                    <input type="submit" id="detail" [routerLink]="['/home/appointment/detail', appointment.appointmentNumber]" value="Details">
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
