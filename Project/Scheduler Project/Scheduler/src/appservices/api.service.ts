@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   getUser(): Observable<any>{
-    var url = this.apiUrl + "/User/GetUser";
+    var url = this.apiUrl + "/user/GetUser";
     let header = this.getHeaders();
     
     return this.http.get<any>(url, {headers: header})
@@ -64,7 +64,7 @@ export class ApiService {
   deleteAppointment(appointment: any){
     var url = this.apiUrl + "/Appointments/Remove";
     var header = this.getHeaders();
-    return this.http.delete(url, {headers: header, body: appointment});
+    return this.http.delete<any>(url, {headers: header, body: appointment});
   }
 
   updateUser(user : any){

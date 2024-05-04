@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserTable } from 'src/UserModel';
 import { ApiService } from 'src/appservices/api.service';
 
 @Component({

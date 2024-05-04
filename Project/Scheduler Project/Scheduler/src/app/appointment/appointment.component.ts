@@ -15,6 +15,7 @@ import { DetailComponent } from '../detail/detail.component';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent {
+
   appointments: Appointment[] = [];
 
   constructor(private service: ApiService, private route: Router, private dialog: MatDialog)
@@ -24,11 +25,11 @@ export class AppointmentComponent {
   ngOnInit(){
       try{
         this.service.getAppointments()
-        .pipe( map((val : Appointment[]) => {
-        this.appointments = val;
-        console.log(this.appointments);
-        }) )
-        .subscribe({ error(err) { } });
+          .pipe( map((val : Appointment[]) => {
+          this.appointments = val;
+          console.log(this.appointments);
+          }) )
+          .subscribe({ error(err) { } });
       }
       catch (err : any){
       }     
@@ -68,5 +69,14 @@ export class AppointmentComponent {
 
   onDetailClicked(appointment: Appointment) {
     this.route.navigateByUrl("/home/appointment/detail");
+  }
+
+  onDeleteClicked(appointment: Appointment) {
+    if (appointment != null){
+      this.service.deleteAppointment(appointment)
+      .pipe( map((val : Appointment[]) => this.appointments = val) )
+        .subscribe({ error(err) { console.log(err);
+         } });
+    }
   }
 }

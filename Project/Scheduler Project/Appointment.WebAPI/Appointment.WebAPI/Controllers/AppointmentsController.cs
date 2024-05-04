@@ -79,7 +79,7 @@ namespace Appointment.WebAPI.Controllers
 
                 _dbContext.Appointments.Remove(currentAppointment);
                 var result = await _dbContext.SaveChangesAsync();
-                return result == 1 ? Ok("Appointment deleted successfully") : BadRequest("There is some problem while creating user");
+                return result == 1 ? Ok(_dbContext.Appointments.Where(x => x.UserId == user.UserId).AsNoTracking().ToList()) : BadRequest("There is some problem while creating user");
             }
             catch (Exception ex)
             {

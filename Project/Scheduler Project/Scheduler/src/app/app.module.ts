@@ -21,6 +21,7 @@ import { AppointmentLandingComponent } from './appointment-landing/appointment-l
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
     AppointmentLandingComponent,
     HomeComponent,
     ProfileComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@
                     <input matInput [type]="'password'" [(ngModel)] = "password" required>
                 </mat-form-field>
             </p>
+            <p>{{errorDetail}}</p>
             <button class="login-button" mat-flat-button color="primary" (click)="onLoginClick()">Login</button>
         </div>
     </div>

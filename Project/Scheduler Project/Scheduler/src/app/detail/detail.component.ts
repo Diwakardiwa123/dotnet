@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Appointment } from 'src/UserModel';
 import { ApiService } from 'src/appservices/api.service';
@@ -12,8 +12,8 @@ import { ApiService } from 'src/appservices/api.service';
 })
 export class DetailComponent {
   value : any;
-
-  constructor(private service: ApiService, private route: ActivatedRoute){ }
+  editIcon : any = "../assets/images/editor.png";
+  constructor(private service: ApiService, private route: ActivatedRoute, private router: Router){ }
 
   ngOnInit(){
 
@@ -34,7 +34,6 @@ export class DetailComponent {
       }
       catch (err : any){
       }
-
       
   }
 }

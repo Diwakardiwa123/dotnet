@@ -1,8 +1,35 @@
 #detail{
-    background-color: rgb(71, 135, 255);
-    height: 40px;
+    background-color: transparent;
+    height: 35px;
     width: 80px;
-    border-radius: 15px;
+    border-radius: 20px;
+    margin-right: 10px;
+    border: 1px solid gray;
+    color: black;
+}
+
+#delete {
+    background-color: rgb(255, 109, 84);
+    height: 35px;
+    width: 80px;
+    border-radius: 20px;
+    margin-right: 10px;
     border: none;
     color: whitesmoke;
+}
+
+table td, table th{
+    padding: 10px;
+}
+
+table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left; 
+    background-color:  rgb(223, 223, 223);
+    border: 1px solid rgb(223, 223, 223);
+}
+
+table td{
+    border-bottom: 1px solid #ddd;
 }

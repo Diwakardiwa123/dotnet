@@ -7,21 +7,25 @@
 .data-container{
     margin: 80px 50px 50px 150px;
     height: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 #content{
     background-color: rgb(247, 247, 247);
     height: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 #details-content{
-    margin: 50px 250px 50px 150px;
+    margin: 50px 50px 50px 150px;
     height: 100%;
 }
 
-.date-time{
-    display: flex;
-    justify-content: space-between;
+
+.location{
+    width: 200px;
 }
 
 #name{
@@ -39,4 +43,9 @@
 #description-title{
     font-size: 18px;
     font-weight:500;
+}
+
+#edit_img{
+    height: 32px;
+    width: 32px;
 }
